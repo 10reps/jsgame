@@ -60,7 +60,7 @@
   .colorBtn {
       font-size: var(--font-size);  /* 버튼 글자크기 변경 */
       padding: calc(var(--base-space) * 2);  /* calc함수를 이용하여 사칙연산 값을 속성값으로 적용 */
-      border-radius: var(--size-border);
+      border-radius: var(--size-border);  /* 컬러 버튼의 테두리 동그랗게 만듬 */
   }
   
   .blue {
@@ -80,8 +80,12 @@
       height: 60%;   /* 아이템 요소의 세로 크기 변경 */
       list-style: none;  /* 맨 앞의 기호를 없애기 위해 list타입 특성 제거 */
       padding-left: 0;  /* 아이템 요소의 왼쪽 패딩 제거 */
-      overflow-y: scroll;
+      overflow-y: scroll;   /* 아이템 목록에 y축 방향으로 스크롤 추가 */
   }
+
+  .items::-webkit-scrollbar {
+      display: none;   /* 스크롤 기능은 있지만, 스크롤 안보이기 하기 */
+}
 
   .item {
       background-color: var(--color-white);  /* 아이템 요소의 배경 색상 변경 */
@@ -97,6 +101,6 @@
   }
 
   .item__description {
-      margin-left: var(--base-space);
-      font-size: var(--font-size);
+      margin-left: var(--base-space);  /* 아이템의 아이콘과 글자 사이의 간격 추가 */
+      font-size: var(--font-size);  /* 아이템 글자 크기 변경 */
   }
