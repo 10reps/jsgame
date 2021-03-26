@@ -1,5 +1,5 @@
 // json파일로 부터 item정보 받아오기
-function loadTtems() {
+function loadItems() {
   return fetch("data/data.json") // fetch함수로 해당 경로의 데이터를 받아온다
     .then((response) => response.json()) // 받아온 데이터를 json형식으로 변롼
     .then((json) => json.items); // json파일 내부에 있는 items를 반환
@@ -12,18 +12,36 @@ function displayItems(items) {
 
 function createHTMLString(item) {
   return `
-    <li class="item">
-        <img src="${item.image}" alt="${item.type}" class="item__thumbnail" />
-        <span class="item__description">${item.gender}, ${item.size}</span>
-    </li>
-    `;
+      <li class="item">
+          <img src="${item.image}" alt="${item.type}" class="item__thumbnail" />
+          <span class="item__description">${item.gender}, ${item.size}</span>
+      </li>
+      `;
+}
+
+function onButtonClick(event, items) {
+  const dataset = event.target.dataset;
+  const key = dataset.key;
+  const value = dataset.value;
+
+  if (key == null || value == null) {
+    return;
+  }
+
+  displayItems(items.filter((item) => item[key] === value));
+}
+
+function setEventListeners(items) {
+  const logo = document.querySelector(".logo");
+  const buttons = document.querySelector(".buttons");
+  logo.addEventListener("click", () => displayItems(items));
+  buttons.addEventListener("click", (event) => onButtonClick(event, items));
 }
 
 // 메인
-loadTtems()
+loadItems()
   .then((items) => {
-    console.log(items);
     displayItems(items);
+    setEventListeners(items);
   })
-
   .catch(console.log);
